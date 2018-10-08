@@ -1,6 +1,39 @@
 require_relative 'config/environment'
 
 class App < Sinatra::Base
-  # Write your code here!
+
+  get "/reversename/:name" do
+    "#{params[:name].reverse}"
+  end
+
+  get "/square/:number" do
+    "#{params[:number].to_i * params[:number].to_i}"
+  end
+
+  get "/say/:number/:phrase" do
+    put = ''
+    params[:number].to_i.times do
+      put += params[:phrase]
+    end
+    put
+  end
+
+  get "/say/:word1/:word2/:word3/:word4/:word5" do
+    "#{params[:word1]} #{params[:word2]} #{params[:word3]} #{params[:word4]} #{params[:word5]}."
+  end
+
+  get "/:operation/:number1/:number2" do
+    operation, num1, num2  = params[:operation], params[:number1].to_i, params[:number2].to_i
+    case operation
+    when "multiply"
+      "#{num1 * num2}"
+    when "subtract"
+      "#{num2 - num1}"
+    when "add"
+      "#{num1 + num2}"
+    when "divide"
+      "#{num1 / num2}"
+    end
+  end
 
 end
