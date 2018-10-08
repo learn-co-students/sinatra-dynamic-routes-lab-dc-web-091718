@@ -22,12 +22,18 @@ class App < Sinatra::Base
   
   get "/say/:word1/:word2/:word3/:word4/:word5" do
     @name = params[:word1]
-    [params[:word1],params[:word1],params[:word1],params[:word1],params[:word1]].join(" ")
+    [params[:word1],params[:word2],params[:word3],params[:word4],params[:word5]].join(" ")+"."
   end
   
   get "/:operation/:number1/:number2" do
     @operation = params[:operation]
-    return "#{params[:number1]+}." if @operation=="add"
+    # puts params[:number1]
+    # puts params[:number2]
+    return "#{(params[:number1].to_i)+(params[:number2].to_i)}." if @operation=="add"
+    return "#{(params[:number1].to_i)-(params[:number2].to_i)}." if @operation=="subtract"
+    return "#{(params[:number1].to_i)*(params[:number2].to_i)}." if @operation=="multiply"
+    return "#{(params[:number1].to_i)/(params[:number2].to_i)}." if @operation=="divide"
+
     "10"
   end
 
